@@ -1,0 +1,250 @@
+:root {
+    --clr-primary-400: 263 55% 52%;
+    --clr-secondary-400: 217 19% 35%;
+    --clr-secondary-500: 219 29% 14%;
+    --clr-neutral-100: 0 0% 100%;
+    --clr-neutral-200: 210 46% 95%;
+    --clr-neutral-300: 0 0% 81%;
+  
+    --ff-primary: "Barlow Semi Condensed", sans-serif;
+  
+    --fw-400: 500;
+    --fw-700: 600;
+  
+    --fs-300: 0.6875rem;
+    --fs-400: 0.8125rem;
+    --fs-500: 1.25rem;
+  }
+  
+  /* Box sizing rules */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  
+  /* Remove default margin */
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  figure,
+  blockquote,
+  dl,
+  dd {
+    margin: 0;
+  }
+  
+  /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+  ul[role="list"],
+  ol[role="list"] {
+    list-style: none;
+  }
+  
+  /* Set core root defaults */
+  html:focus-within {
+    scroll-behavior: smooth;
+  }
+  
+  /* Set core body defaults */
+  body {
+    min-height: 100vh;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+  }
+  
+  /* A elements that don't have a class get default styles */
+  a:not([class]) {
+    text-decoration-skip-ink: auto;
+  }
+  
+  /* Make images easier to work with */
+  img,
+  picture {
+    max-width: 100%;
+    display: block;
+  }
+  
+  /* Inherit fonts for inputs and buttons */
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+  
+  /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+  @media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+      scroll-behavior: auto;
+    }
+  
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  
+  body {
+    display: grid;
+    place-content: center;
+    min-height: 100vh;
+  
+    font-family: var(--ff-primary);
+    font-weight: var(--fw-400);
+  
+    background-color: hsl(var(--clr-neutral-200));
+  }
+  
+  h1,
+  h2,
+  h3 {
+    font-weight: var(--fw-700);
+  }
+  
+  /* utilities */
+  .flex {
+    display: flex;
+    gap: var(--gap, 1rem);
+  }
+  
+  .flow > *:where(:not(:first-child)) {
+    margin-top: var(--flow-spacer, 1em);
+  }
+  
+  .bg-primary-400 {
+    background: hsl(var(--clr-primary-400));
+  }
+  .bg-secondary-400 {
+    background: hsl(var(--clr-secondary-400));
+  }
+  .bg-secondary-500 {
+    background: hsl(var(--clr-secondary-500));
+  }
+  
+  .bg-neutral-100 {
+    background: hsl(var(--clr-neutral-100));
+  }
+  
+  .text-neutral-100 {
+    color: hsl(var(--clr-neutral-100));
+  }
+  .text-secondary-400 {
+    color: hsl(var(--clr-secondary-400));
+  }
+  .border-primary-400 {
+    border: 2px solid #a775f1;
+  }
+  
+  /* .grid-col-span-2 { */
+   /* grid-column: span 2; /*after applying this we can see that patrick is taking extra space at the button 
+    by default it is set to that , here utility classes dnt work properly here , bcz we need to place the item at specific place only*/
+  /* } */
+  
+  /* components */
+  .testimonial-grid {
+    display: grid;
+     /* change : we have started using the grid here before that only the css is being used , but we can see that nothing much has happend
+     while using the grid, while if we are using the flex they will have provided the col/ row strucute jsut by applying here */
+    gap: 1.5rem; /*we gen.testimonial-erally using the gap for the spacing as we need both the horizonatal and vertical spacing difficult with margin*/
+   /* grid-template-columns: repeat(4, 1fr) ;/* fr - fraction[this is specific to grid only],  we can also use perentage or directly the pixel defining the the size of the col grid
+                                  other most imp thing here is draw the rows and col. how many we actully needs it
+                                  strongly recommneded that to declate the grid-tem-col, it will automatically take the rows if needed-here we are explicitly declaring the col. here
+                                  declare the rows unless it is needed here . when I am using the media query than I'll place this inside of it, so that when I am narrowing the screen than I dont want it to have the 4 colmns at that time, if not put than ill get those 4 colmn*/
+   padding-block: 2rem;
+    width: min(95%, 70rem);
+    margin-inline: auto;
+  } 
+  
+  .testimonial {
+    font-size: var(--fs-400);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 2.5rem 3.75rem 3rem -3rem hsl(var(--clr-secondary-400) / 0.25);
+  }
+  
+  @media (min-width: 50em) {
+  
+    .grid-col-span-2 { 
+       grid-column: span 2;  /* bringing these utility classes here, so that when the grid got modified than only we can need the span 
+       if I am not taking it here/taking it outside than it will span the gird , m we want in the smaller size it each ele. should be placed one after another*/
+    }
+  
+    .testimonial-grid{
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .testimonial:last-child {
+       /* grid-column-start : 3; /*here gap is also a big thing where there is not 
+       gap btwn the : and the last-child otherwise gives error,[18:16 kevin powell] this is similar to span-2 for the last element. but we are not using that bcz we need to put the last element at the 3rd place
+       span-2 we cant lock the element between the grid, when it starts it will capture the 2nd grid-col thats it, it doesnt matter where they are, use the line no. when it is necessasry , unless use grid */
+       /* grid-column-end : 5;  */
+     
+        grid-row-start: 1;        /*if we put only this it will start the element from the 1st row and at the first col. but we want it to start at 4th col.*/
+        grid-column-start: 4;  /*here it is starting from the 4th col. but from the 2nd row as of now we have 3rd ele, that we need to replace it with so thats why we need to put both of them rows and col
+        though it is following a particular order from the dom it will slide down to the next grid*/
+        grid-row-end: 3; /*here we are taking the reference t=of the line no. to make it end-use of dev. tools
+        or we can also use the span-2 for rows
+        we can also use grid-row 1/3 1 is the starting and 3 is the ending 
+        or we can also do grid-row: 1 /span 2;*/
+  
+        /* we are pkacong these two properties here when the screen size is less than 40 rem than we can these properties will hide otherwise stay on the screen  */
+    } 
+  }
+    
+  
+  
+  /* .testimonial:last-child { */
+    /* grid-column-start : 3; /*here gap is also a big thing where there is not 
+    gap btwn the : and the last-child otherwise gives error,[18:16 kevin powell] this is similar to span-2 for the last element. but we are not using that bcz we need to put the last element at the 3rd place
+    span-2 we cant lock the element between the grid, when it starts it will capture the 2nd grid-col thats it, it doesnt matter where they are, use the line no. when it is necessasry , unless use grid */
+    /* grid-column-end : 5;  */
+   
+   /* grid-row-start: 1;        if we put only this it will start the element from the 1st row and at the first col. but we want it to start at 4th col.*/
+    /* grid-column-start: 4; here it is starting from the 4th col. but from the 2nd row as of now we have 3rd ele, that we need to replace it with so thats why we need to put both of them rows and col
+    though it is following a particular order from the dom it will slide down to the next grid*/
+   /* grid-row-end: 3; here we are taking the reference t=of the line no. to make it end-use of dev. tools
+     or we can also use the span-2 for rows
+      we can also use grid-row 1/3 1 is the starting and 3 is the ending 
+      or we can also do grid-row: 1 /span 2;*/
+  /*}  */
+  
+  /*If I am removing grid-col still it will work , becz we are using grid-column-start for the last child , it will tell that there are 4 -colms, though we can see there is narrow and thick colmns are there if we remove all the grid properties*/
+  
+  .testimonial.quote {
+    background-image: url("./images/bg-pattern-quotation.svg");
+    background-repeat: no-repeat;
+    background-position: top right 10%;
+  }
+  
+  .testimonial img {
+    width: 1.75rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+  }
+  
+  .testimonial .name {
+    font-size: var(--fs-400);
+    font-weight: var(--fw-400);
+    line-height: 1;
+  }
+  
+  .testimonial .position {
+    font-size: var(--fs-300);
+    opacity: 0.5;
+  }
+  
+  .testimonial > p:first-of-type {
+    font-size: var(--fs-500);
+    line-height: 1.2;
+  }
+  
+  .testimonial > p:last-of-type {
+    opacity: 0.7;
+  }
+  
